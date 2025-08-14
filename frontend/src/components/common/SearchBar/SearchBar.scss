@@ -1,0 +1,74 @@
+.search-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  
+  .search-container {
+    position: relative;
+    display: flex;
+    height: 58px;
+    width: 70%;
+    align-items: center;
+    background: #fff;
+    border-radius: 9999px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid #e5e5e5;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    
+    &:focus-within {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border-color: #f97316; // orange focus
+    }
+  }
+  
+  .search-input {
+    flex: 1;
+    padding-left: 35px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background: transparent;
+    font-size: 15px;
+    line-height: 22px;
+    font-weight: 400;
+    
+    &::placeholder {
+      color: #9ca3af; // gray placeholder
+    }
+    
+    &:focus {
+      outline: none;
+    }
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: 30px;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #6b7280; // gray color
+    pointer-events: none; // Make it non-clickable
+    transition: color 0.2s ease;
+  }
+  
+  // Icon color changes when input is focused
+  .search-container:focus-within .search-icon {
+    color: #f97316; // orange when focused
+  }
+  
+  // Responsive design
+  @media (max-width: 768px) {
+    .search-input {
+      padding: 0.625rem 0.875rem;
+      padding-right: 2.5rem;
+      font-size: 0.875rem;
+    }
+    
+    .search-icon {
+      right: 0.75rem;
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}

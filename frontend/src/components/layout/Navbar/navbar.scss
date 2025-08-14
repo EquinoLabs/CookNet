@@ -1,0 +1,149 @@
+.navbar {
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  margin-bottom: 10px;
+  
+  .navbar-container {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    height: 64px;
+  }
+  
+  // Logo Section (Left)
+  .navbar-logo {
+    flex: 0 0 auto;
+    
+    .logo-text {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #E06351FF; // orange-500
+      margin: 0;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      
+      &:hover {
+        color: #ea580c; // orange-600
+      }
+    }
+  }
+  
+  // Navigation Links (Center)
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+    justify-content: center;
+    
+    .nav-link {
+      font-weight: 400;
+      color: #374151; // gray-700
+      text-decoration: none;
+      transition: color 0.2s ease;
+      position: relative;
+      font-size: 14px;
+      opacity: 1;
+      line-height: 22px;
+      
+      &:hover {
+        color: #326428FF; // orange-500
+      }
+      
+      // Optional: Add underline effect on hover
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #326428FF;
+        transition: width 0.2s ease;
+      }
+      
+      &:hover::after {
+        width: 100%;
+      }
+    }
+    
+    // Hide navigation on mobile (optional)
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+  
+  // Auth Buttons (Right)
+  .navbar-auth {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 0 0 auto;
+    
+    .auth-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .login-btn {
+      font-size: 14px; 
+      line-height: 22px; 
+      font-weight: 500; 
+      color: #171A1FFF; /* neutral-900 */
+      background: #FFFFFFFF; /* white */
+      opacity: 1; 
+      border-radius: 6px; 
+      border-width: 1px; 
+      border-color: #DEE1E6FF; /* neutral-300 */
+      border-style: solid;
+      
+      &:hover {
+        color: #f97316; // orange-500
+        border-color: #f97316;
+      }
+    }
+    
+    .signup-btn {
+      background: #E06351FF; // orange-500
+      font-size: 14px; 
+      line-height: 22px; 
+      font-weight: 500; 
+      color: #FFFFFFFF; /* white */
+      opacity: 1; 
+      border: none; 
+      border-radius: 6px; 
+      
+      &:hover {
+        background: rgb(212, 76, 55); // orange-600
+      }
+    }
+  }
+  
+  // Mobile responsiveness
+  @media (max-width: 768px) {
+    .navbar-container {
+      padding: 0.5rem 1rem;
+    }
+    
+    .logo-text {
+      font-size: 1.5rem;
+    }
+    
+    .auth-btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.75rem;
+    }
+  }
+}

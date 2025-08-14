@@ -1,0 +1,21 @@
+.trending-recipes {
+    width: 100%;
+    padding: 107px 128px 112px 128px;
+    background: #FAFAFBFF; /* neutral-100 */
+    border-radius: 0px 0px 0px 0px; 
+
+    .title {
+        text-align: center;
+        padding-bottom: 69px;
+        font-size: 36px; 
+        line-height: 40px; 
+        font-weight: 600; 
+        color: #171A1FFF; /* neutral-900 */
+    }
+
+    .inner-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+    }
+}

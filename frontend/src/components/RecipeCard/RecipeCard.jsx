@@ -9,7 +9,7 @@ export default function RecipeCard({ recipe, onClick }) {
         alt={recipe.title}
         className="w-full h-40 object-cover rounded"
       />
-      <h3 className="mt-2 font-semibold">{recipe.title}</h3>
+      <h3 className="mt-2 font-semibold">{recipe.name}</h3>
     </div>
   );
 }
