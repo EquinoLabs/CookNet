@@ -21,3 +21,12 @@ export function getRecipeById(id) {
   const recipe = dummyData.find(item => item.id === id);
   return recipe || null;
 }
+
+export function loginUser(email, password) {
+  return callApi('post:/users/login', { email, password });
+}
+
+export function registerUser(username, email, password) {
+  console.log(username, email, password);
+  return callApi('post:/users/register', { username, email, password });
+}

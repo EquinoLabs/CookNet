@@ -2,7 +2,7 @@ import './JoinNowSection.scss'
 
 export default function JoinNowSection() {
     const JoinBtnClicked = () => {
-        window.location.href = "/signup";
+        window.location.href = "/register";
     }
 
     return (

@@ -26,3 +26,16 @@ class UserResponse(UserBase):
 
     class Config:
         orm_mode = True  # allows conversion from ORM objects
+
+
+# For JWT token response
+class Token(BaseModel):
+    access_token: str
+    refresh_token: str
+    token_type: str
+    user: UserResponse
+
+
+# For token data
+class TokenData(BaseModel):
+    user_id: Optional[int] = None
