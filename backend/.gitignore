@@ -1,2 +1,68 @@
-env
+# Byte-compiled / optimized / DLL files
+__pycache__/
 __pycache__
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Local configuration
+*.env
+*.local
+*.DS_Store
+
+# Database and seed data
+*.sqlite3
+*.db
+*.bak
+*.sql
+
+# Logs
+*.log
+logs/
+log/
+
+# Ignore OS-specific files
+Thumbs.db
+ehthumbs.db
+.DS_Store
+Icon?
