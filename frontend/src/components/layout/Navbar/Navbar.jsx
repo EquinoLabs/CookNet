@@ -1,6 +1,17 @@
 import './Navbar.scss';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
+
+  const handleSignUpClick = () => {
+    navigate('/register');
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -12,7 +23,7 @@ export default function Navbar() {
 
         {/* Navigation Links - Centered */}
         <div className="navbar-nav">
-          <a href="#" className="nav-link">Home</a>
+          <a href="/" className="nav-link">Home</a>
           <a href="#" className="nav-link">Recipe</a>
           <a href="#" className="nav-link">Community</a>
           <a href="#" className="nav-link">Blog</a>
@@ -21,8 +32,8 @@ export default function Navbar() {
 
         {/* Auth Buttons */}
         <div className="navbar-auth">
-          <button className="auth-btn login-btn">Login</button>
-          <button className="auth-btn signup-btn">Sign Up</button>
+          <button className="auth-btn login-btn" onClick={handleLoginClick}>Login</button>
+          <button className="auth-btn signup-btn" onClick={handleSignUpClick}>Sign Up</button>
         </div>
       </div>
     </nav>

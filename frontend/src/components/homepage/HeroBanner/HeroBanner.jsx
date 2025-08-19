@@ -4,7 +4,7 @@ import './HeroBanner.scss'
 
 export default function HeroBanner() {
     const JoinBtnClicked = () => {
-        window.location.href = "/signup";
+        window.location.href = "/register";
     }
 
     return (
