@@ -1,0 +1,23 @@
+// actions.js - your app specific API functions
+
+import { callApi } from "./helper";
+import dummyData from "../constants/dummy_recipe_data.json";
+
+export function getAppStatus() {
+  return callApi('get:/recipe');
+}
+
+export function getUserSearch(query) {
+  // return callApi(`get:/search?query=${query}`);
+  
+  // Returning dummy data instead
+  return dummyData;
+}
+
+export function getRecipeById(id) {
+  // return callApi(`get:/recipe/${id}`);
+
+  // Dummy data
+  const recipe = dummyData.find(item => item.id === id);
+  return recipe || null;
+}

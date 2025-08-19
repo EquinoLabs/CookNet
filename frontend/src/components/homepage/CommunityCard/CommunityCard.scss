@@ -1,0 +1,31 @@
+.community-card {
+  position: relative;
+  width: 160px;
+  height: 100px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 1px rgba(23, 26, 31, 0.87),
+              0px 0px 2px rgba(23, 26, 31, 0.08) !important;
+  padding: 1rem;
+  text-align: center;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1),
+                0px 2px 4px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+    cursor: pointer;
+  }
+
+  .community-icon {
+    margin: 0 auto 0.75rem;
+    display: block;
+  }
+
+  .community-name {
+    font-size: 14px; 
+    line-height: 20px; 
+    font-weight: 500; 
+    color: #171A1FFF;
+  }
+}
