@@ -1,5 +1,7 @@
 from typing import Optional
 from pydantic import BaseModel, EmailStr
+from datetime import datetime
+from uuid import UUID
 
 
 class UserBase(BaseModel):
@@ -18,9 +20,19 @@ class UserLogin(BaseModel):
     password: str
 
 
+# Basic user info for posts/relationships (to avoid circular imports)
+class UserBasic(BaseModel):
+    id: UUID
+    username: str
+    profile_image: Optional[str] = None
+
+    class Config:
+        from_attributes = True  # Updated from orm_mode for Pydantic v2
+
+
 # For returning user info (without password)
 class UserResponse(UserBase):
-    id: int
+    id: UUID
     is_active: bool
     profile_image: Optional[str] = None   # optional
 
@@ -38,4 +50,4 @@ class Token(BaseModel):
 
 # For token data
 class TokenData(BaseModel):
-    user_id: Optional[int] = None
+    user_id: Optional[UUID] = None

@@ -4,6 +4,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from jose import JWTError, jwt
+from uuid import UUID
 
 from api.user import models, schemas
 from api.user.auth import (
@@ -154,7 +155,7 @@ async def refresh_token(
         raise credentials_exception
     
     # Get user from database
-    result = await db.execute(select(models.User).where(models.User.id == int(user_id)))
+    result = await db.execute(select(models.User).where(models.User.id == UUID(user_id)))
     user = result.scalars().first()
     
     if user is None:
