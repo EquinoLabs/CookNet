@@ -13,7 +13,47 @@ const routerConfig = [
     element: <RootRedirect />  // Handles logged-in vs not-logged-in logic
   },
   {
-    path: "/home", 
+    path: "/feed", 
+    element: (
+      <ProtectedRoute>
+        <MainApp />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: "/communities", 
+    element: (
+      <ProtectedRoute>
+        <MainApp />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: "/dashboard", 
+    element: (
+      <ProtectedRoute>
+        <MainApp />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: "/saved", 
+    element: (
+      <ProtectedRoute>
+        <MainApp />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: "/friends", 
+    element: (
+      <ProtectedRoute>
+        <MainApp />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: "/settings", 
     element: (
       <ProtectedRoute>
         <MainApp />

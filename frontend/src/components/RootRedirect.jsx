@@ -11,8 +11,8 @@ const RootRedirect = () => {
     if (!loading) {
       console.log("auth value:", isAuthenticated)
       if (isAuthenticated) {
-        // User is logged in, redirect to /home
-        navigate('/home', { replace: true });
+        // User is logged in, redirect to /feed
+        navigate('/feed', { replace: true });
       }
       // If not authenticated, stay on current page (shows HomePage)
     }

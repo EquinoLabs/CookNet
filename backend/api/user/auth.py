@@ -8,6 +8,7 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
+from uuid import UUID
 
 from api.user import models, schemas
 from database.database import get_db
@@ -15,7 +16,7 @@ from database.database import get_db
 load_dotenv()
 
 # JWT Configuration
-SECRET_KEY = os.getenv("SECRET_KEY", "fallback-secret-key")
+SECRET_KEY = os.getenv("JWT_SECRET_KEY", "fallback-secret-key")
 ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "15"))  # Short-lived
 REFRESH_TOKEN_EXPIRE_DAYS = int(os.getenv("REFRESH_TOKEN_EXPIRE_DAYS", "7"))  # Longer-lived
@@ -73,7 +74,7 @@ async def verify_token(credentials: HTTPAuthorizationCredentials = Depends(secur
         user_id: str = payload.get("sub")
         if user_id is None:
             raise credentials_exception
-        token_data = schemas.TokenData(user_id=int(user_id))
+        token_data = schemas.TokenData(user_id=UUID(user_id))
     except JWTError:
         raise credentials_exception
     

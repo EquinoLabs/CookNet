@@ -1,0 +1,19 @@
+content: "Just tried this amazing pasta recipe! The flavors were incredible and it was so easy to make. Perfect for a cozy dinner at home 🍝"
+
+recipe_title: "Creamy Garlic Parmesan Pasta"
+
+ingredients: "500g fettuccine pasta, 3 cloves garlic minced, 1 cup heavy cream, 1 cup parmesan cheese grated, 2 tbsp butter, 1 tsp black pepper, 1/2 cup fresh parsley chopped, Salt to taste"
+
+instructions: "1. Cook pasta according to package directions. 2. In a large pan, melt butter and sauté garlic for 1 minute. 3. Add heavy cream and bring to simmer. 4. Add parmesan cheese and stir until melted. 5. Toss in cooked pasta and parsley. 6. Season with salt and pepper. 7. Serve immediately while hot."
+
+cooking_time: 25
+
+servings: 4
+
+difficulty: "easy"
+
+cuisine_type: "Italian"
+
+is_public: true
+
+image: [YOUR_IMAGE_FILE_HERE]
