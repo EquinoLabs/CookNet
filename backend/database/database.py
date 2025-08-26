@@ -9,7 +9,7 @@ app = FastAPI()
 load_dotenv()
 
 CONNECTION_NEON_DB = os.getenv("CONNECTION_NEON_DB")
-DATABASE_URL = f"postgresql+asyncpg://{CONNECTION_NEON_DB}"
+DATABASE_URL = f"{os.getenv("DATABASE_URL")}{CONNECTION_NEON_DB}"
 
 ssl_context = ssl.create_default_context()
 
