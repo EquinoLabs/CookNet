@@ -1,0 +1,62 @@
+// Feed.scss
+.feed-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 32px;
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.feed-loading, .feed-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.loading-spinner {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+  
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-more {
+  padding: 20px;
+  text-align: center;
+}
+
+.end-of-feed {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-style: italic;
+}
+
+.empty-feed {
+  text-align: center;
+  padding: 60px;
+  color: #666;
+}

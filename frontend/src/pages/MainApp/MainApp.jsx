@@ -9,6 +9,7 @@ import PersonalDashboard from '../../components/mainapp/PersonalDashboard.jsx/Pe
 import SavedRecipes from '../../components/mainapp/SavedRecipes.jsx/SavedRecipes';
 import Friends from '../../components/mainapp/Friends/Friends';
 import SettingsPage from '../../components/mainapp/Settings/Settings';
+import DiscoverSidebar from '../../components/layout/DiscoverSidebar/DiscoverSidebar';
 import { House, Users, LayoutDashboard, Bookmark, Handshake, Settings } from "lucide-react";
 import './MainApp.scss';
 
@@ -35,12 +36,6 @@ const MainApp = () => {
     return () => window.removeEventListener('popstate', handleLocationChange);
   }, []);
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-    console.log('User logged out successfully');
-  };
-
   const getCurrentComponent = () => {
     const currentItem = sidebarData.find(item => currentPath.startsWith(item.path));
     return currentItem ? currentItem.component : Feed; // Default to Feed if no match
@@ -50,10 +45,17 @@ const MainApp = () => {
 
   return (
     <div className="main-app">
-      <Sidebar sidebar={sidebarData} currentPath={currentPath} />
-      <main className="main-content">
-        <CurrentComponent />
-      </main>
+      <div className='sidebar-main'>
+        <Sidebar sidebar={sidebarData} currentPath={currentPath} />
+      </div>
+      <div className="main-content-container">
+        <main className="main-content">
+          <CurrentComponent />
+        </main>
+        <aside className="discover-sidebar-main">
+          <DiscoverSidebar />
+        </aside>
+      </div>
     </div>
   );
 };

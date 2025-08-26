@@ -1,0 +1,41 @@
+.discover-sidebar {
+  width: 100%; /* Adjust as needed */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 15px;
+  }
+
+  .suggested-communities {
+    padding: 25px 24px;
+    color: #171A1FFF;
+    border-radius: 10px; 
+    box-shadow: 0px 0px 1px #171a1fD1, 0px 0px 1px #171a1f14;
+
+    h3 {
+        color: #171A1FFF;
+        font-size: 20px; 
+        line-height: 28px; 
+        font-weight: 600; 
+    }
+  }
+
+  .suggested-recipes {
+    padding: 25px 24px;
+    color: #171A1FFF;
+    border-radius: 10px; 
+    box-shadow: 0px 0px 1px #171a1fD1, 0px 0px 1px #171a1f14;
+
+    h3 {
+        color: #171A1FFF;
+        font-size: 20px; 
+        line-height: 28px; 
+        font-weight: 600; 
+    }
+  }
+}

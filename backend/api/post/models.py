@@ -44,6 +44,8 @@ class Post(Base):
     likes = relationship("Like", back_populates="post", cascade="all, delete-orphan")
     comments = relationship("Comment", back_populates="post", cascade="all, delete-orphan")
     saves = relationship("Save", back_populates="post", cascade="all, delete-orphan")
+    community_id = Column(UUID(as_uuid=True), ForeignKey("communities.id"), nullable=True)
+    community = relationship("Community", back_populates="posts")
 
 
 class Like(Base):

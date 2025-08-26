@@ -3,6 +3,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, func
 from sqlalchemy.orm import relationship
 from database.database import Base
+from api.community.models import community_members
 
 class User(Base):
     __tablename__ = "users"
@@ -20,3 +21,7 @@ class User(Base):
 
     # Relationship with posts
     posts = relationship("Post", back_populates="author", cascade="all, delete-orphan")
+
+    # Relationship with communities
+    created_communities = relationship("Community", back_populates="created_by")
+    joined_communities = relationship("Community", secondary=community_members, back_populates="members")
