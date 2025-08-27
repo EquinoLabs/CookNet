@@ -16,10 +16,6 @@ FRONTEND_URL = os.getenv("FRONTEND_URL")
 if FRONTEND_URL:
     origins.append(FRONTEND_URL)
 
-# Add this debug line
-print(f"CORS origins: {origins}")
-print(f"FRONTEND_URL from env: {FRONTEND_URL}")
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
