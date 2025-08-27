@@ -22,7 +22,7 @@ RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
 # Copy backend code
-COPY . /app/
+COPY . .
 
 # Expose port (Cloud Run uses 8080 by default)
 EXPOSE 8080
