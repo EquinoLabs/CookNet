@@ -1,7 +1,7 @@
 // axios wrapper
 import axios from 'axios';
 
-const BACKEND_URL = import.meta.env.BACKEND_API_URL || '';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_API_URL || '';
 const API_URL = `${BACKEND_URL}/api`;
 console.log('BACKEND_URL', API_URL);
 
