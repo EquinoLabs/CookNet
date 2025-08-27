@@ -1,9 +1,10 @@
 // axios wrapper
 import axios from 'axios';
 
+const API_URL = import.meta.env.BACKEND_API_URL || '/api';
+
 const api = axios.create({
-  baseURL: '/api', // or your backend base URL
-  // You can add headers here, e.g. Authorization token, content-type, etc.
+  baseURL: API_URL,
 });
 
 // Function to set auth token in headers
@@ -13,6 +14,13 @@ export const setAuthToken = (token) => {
   } else {
     delete api.defaults.headers.common['Authorization'];
   }
+};
+
+// Helper function to check if user has valid tokens
+export const hasValidTokens = () => {
+  const accessToken = localStorage.getItem('access_token');
+  const refreshToken = localStorage.getItem('refresh_token');
+  return !!(accessToken && refreshToken);
 };
 
 // Function to clear all tokens
@@ -49,6 +57,9 @@ const refreshAccessToken = async () => {
     throw error;
   }
 };
+
+// Helper function to manually clear tokens (for logout)
+export const clearAllTokens = clearTokens;
 
 // Attach access token to every request
 api.interceptors.request.use((config) => {
@@ -104,7 +115,6 @@ export async function callApi(endpointWithMethod, data = null) {
     if (method.toLowerCase() === 'get' || method.toLowerCase() === 'delete') {
       // For GET or DELETE, data is treated as query params
       config.params = data;
-      console.log("url:", endpoint);
       response = await api.request({ method, url: endpoint, ...config });
     } else {
       // For POST, PUT, PATCH, data is the request body
@@ -117,13 +127,3 @@ export async function callApi(endpointWithMethod, data = null) {
     throw error;
   }
 }
-
-// Helper function to check if user has valid tokens
-export const hasValidTokens = () => {
-  const accessToken = localStorage.getItem('access_token');
-  const refreshToken = localStorage.getItem('refresh_token');
-  return !!(accessToken && refreshToken);
-};
-
-// Helper function to manually clear tokens (for logout)
-export const clearAllTokens = clearTokens;

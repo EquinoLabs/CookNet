@@ -6,6 +6,13 @@ import os
 import uuid
 from uuid import UUID
 from typing import Tuple
+from datetime import datetime, timedelta
+from threading import Lock
+from collections import defaultdict
+
+# in-memory cache for pre-signed url
+url_cache = {}
+locks = defaultdict(Lock)
 
 class CloudflareR2Client:
     def __init__(self):
@@ -66,14 +73,32 @@ class CloudflareR2Client:
             raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
 
     def get_presigned_url(self, object_key: str, expires_in: int = 3600) -> str:
-        """Generate presigned URL for private object"""
-        if self.is_bucket_public():
-            return f"{self.public_url}/{object_key}"
-        return self.client.generate_presigned_url(
-            'get_object',
-            Params={'Bucket': self.bucket_name, 'Key': object_key},
-            ExpiresIn=expires_in
-        )
+        """Generate presigned URL for private object with caching + lock"""
+        now = datetime.utcnow()
+
+        # quick check without lock (fast path)
+        if object_key in url_cache:
+            url, expiry_time = url_cache[object_key]
+            if expiry_time > now:
+                return url
+
+        # lock only when we need to regenerate
+        with locks[object_key]:
+            # check again inside lock (another thread may have already refreshed it)
+            if object_key in url_cache:
+                url, expiry_time = url_cache[object_key]
+                if expiry_time > now:
+                    return url
+
+            # generate new URL
+            url = self.client.generate_presigned_url(
+                "get_object",
+                Params={"Bucket": self.bucket_name, "Key": object_key},
+                ExpiresIn=expires_in,
+            )
+            expiry_time = now + timedelta(seconds=expires_in - 60)  # renew a bit earlier
+            url_cache[object_key] = (url, expiry_time)
+            return url
     
     def is_bucket_public(self) -> bool:
         """Check if bucket is configured for public access"""
