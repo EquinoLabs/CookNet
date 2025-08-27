@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from api.router import api_router
 from media.static_files import mount_static_files
 from fastapi.middleware.cors import CORSMiddleware
+import os
+import uvicorn
 
 app = FastAPI()
 
@@ -9,6 +11,10 @@ origins = [
     "http://localhost:5173", # frontend
     "http://localhost:3000", # frontend
 ]
+
+FRONTEND_URL = os.getenv("FRONTEND_URL")
+if FRONTEND_URL:
+    origins.append(FRONTEND_URL)
 
 app.add_middleware(
     CORSMiddleware,
@@ -25,3 +31,7 @@ async def root():
 
 app.include_router(api_router, prefix="/api")
 mount_static_files(app)
+
+if __name__ == "__main__":
+    port = int(os.getenv("URL_PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
