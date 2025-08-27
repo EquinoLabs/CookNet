@@ -1,6 +1,6 @@
-import './Navbar.scss';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
+import './Navbar.scss'
 
 
 export default function Navbar() {
