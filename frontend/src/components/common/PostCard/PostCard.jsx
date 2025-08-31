@@ -35,7 +35,7 @@ const PostCard = ({ post, onLike }) => {
       <div className="post-header">
         <div className="user-info">
           <img 
-            src={post.author.avatar_url || '/default-avatar.png'} 
+            src={post.author.profile_image || '/default-avatar.png'} 
             alt={post.author.username}
             className="avatar"
           />
