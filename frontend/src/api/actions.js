@@ -31,6 +31,21 @@ export function registerUser(username, email, password) {
   return callApi('post:/users/register', { username, email, password });
 }
 
+export function googleAuthToken() {
+  return callApi('get:/users/google-auth-url');
+}
+
+export function verifyEmail(token) {
+  console.log("reuest came with token", token);
+  return callApi(`get:/users/verify-email?token=${token}`);
+}
+
+export async function getMediaURL(mediaId) {
+  let data = await callApi(`get:/stored-media/${mediaId}`);
+  console.log("data", data.url)
+  return data?.url;
+}
+
 export function postLike(postId) {
   return callApi(`post:/posts/${postId}/like`, { postId });
 }

@@ -1,12 +1,13 @@
 from api.cloudflare.r2_client import CloudflareR2Client
 from fastapi import UploadFile, HTTPException
+from uuid import UUID
 from typing import Tuple
 import os
 
 # Initialize R2 client
 r2_client = CloudflareR2Client()
 
-async def upload_media_file(file: UploadFile, user_id: int) -> Tuple[str, str]:
+async def upload_media_file(file: UploadFile, user_id: UUID) -> Tuple[str, str]:
     """
     Upload media file to R2 bucket
     Returns: (url, media_type)

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../components/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { getMediaURL } from "../../api/actions";
+import { emitToast } from "../../components/common/ToastContext/ToastEmiiter";
+import GoogleAuth from "./GoogleAuth";
+import constants from "../../constants";
 import "./authentication.scss";
 
 const Register = () => {
@@ -13,6 +17,20 @@ const Register = () => {
   
   const { register, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+
+  const [bgUrl, setBgUrl] = useState(null);
+
+  useEffect(() => {
+      // fetch only if no url is set yet
+      if (!bgUrl) {
+          getMediaURL(constants.RegisterPage.imageId)
+              .then((url) => setBgUrl(url))
+              .catch((err) => {
+                  console.error("Failed to load banner image:", err);
+              });
+          console.log("URL", bgUrl)
+      }
+  }, [bgUrl]);
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -30,22 +48,27 @@ const Register = () => {
     try {
       const result = await register(username, email, password);
       if (result.success) {
-        console.log("Registration successful:", result.message);
-        setSuccess("Registration successful! Please login.");
+        emitToast(constants.RegisterPage.Success, "", "success");
+        setSuccess(constants.RegisterPage.Success);
         // Clear form
         setUsername("");
         setEmail("");
         setPassword("");
         // Redirect to login after a delay
         setTimeout(() => {
-          navigate('/login');
-        }, 2000);
+          navigate('/email-verification-sent');
+        }, 500);
       } else {
-        setError(result.error);
+        let ErrorMsg = result.error
+        if (Array.isArray(result.error) && result.error.length > 0) {
+          ErrorMsg = result.error[0].msg;
+        }
+        emitToast(constants.RegisterPage.Error.title, ErrorMsg, "error");
+        setError(ErrorMsg);
       }
     } catch (error) {
-      console.error("Registration failed:", error);
-      setError("An unexpected error occurred");
+      emitToast(constants.RegisterPage.Error.title, constants.RegisterPage.Error.err_500, "error");
+      setError(constants.RegisterPage.Error.err_500);
     } finally {
       setIsLoading(false);
     }
@@ -60,7 +83,7 @@ const Register = () => {
     <div className="register-wrapper">
       <a href="/" className="cooknet-link">CookNet</a>
       <div className="register-banner">
-        <img src="http://localhost:8000/media/images/HomePage/Herobanner2.jpg" alt="CookNet Banner" className="banner-image" />
+        <img src={bgUrl} alt="CookNet Banner" className="banner-image" />
       </div>
       <div className="register-container">
         <h2 className="register-title">Join CookNet Today</h2>
@@ -98,9 +121,12 @@ const Register = () => {
             required
             className="register-input"
           />
-          
-          <button type="submit" className="register-button">
-            Register Account
+          <button 
+            type="submit" 
+            className={`register-button ${isLoading ? "loading" : ""}`} 
+            disabled={isLoading}
+          >
+            {isLoading ? <span className="spinner"></span> : "Register Account"}
           </button>
           
           <div className="divider-container">
@@ -109,9 +135,9 @@ const Register = () => {
             <div className="divider-line"></div>
           </div>
           
-          <button className="google-button" onClick={handleGoogleSignup}>
-            Sign up with Gmail
-          </button>
+          <div className="google-auth-wrapper">
+            <GoogleAuth />
+          </div>
         </form>
         
         <p className="register-footer">

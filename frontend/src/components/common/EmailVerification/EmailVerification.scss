@@ -1,0 +1,165 @@
+.email-sent-page {
+    background-color: #e7e7e7;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .email-sent-container {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 80%;
+        text-align: center;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: #28a745; /* green checkmark */
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 32px;
+            color: #333;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 16px; /* space between buttons */
+            justify-content: center;
+            margin-top: 20px;
+
+            .open-gmail-button {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                background-color: #ffffff; /* white background */
+                color: #202124; /* dark text */
+                font-weight: 600;
+                font-size: 16px;
+                padding: 10px 20px;
+                border-radius: 8px;
+                border: 1px solid #dadce0;
+                text-decoration: none;
+                transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+                &:hover {
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                transform: translateY(-2px);
+                }
+
+                img {
+                width: 26px;
+                height: 26px;
+                }
+            }
+
+            .go-home-button {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px 20px;
+                background-color: #E06351FF; /* blue */
+                color: #fff;
+                font-weight: 600;
+                border-radius: 8px;
+                text-decoration: none;
+                transition: background-color 0.2s ease;
+
+                &:hover {
+                    background-color: rgb(212, 76, 55);
+                }
+            }
+        }
+    }
+}
+
+
+/* Page background */
+.verify-email-page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e7e7e7;
+
+  /* Inner container */
+  .verify-email-container {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+    .verify-email-content {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+
+        h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #28a745; /* green for success */
+        }
+
+        p {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 32px;
+        }
+
+        .login-link-button {
+            width: 30%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            background-color: #4a90e2; /* blue button */
+            color: #fff;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+
+            &:hover {
+                background-color: #357ab7;
+            }
+        }
+
+        .home-link-button {
+            width: 30%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            background-color: #E06351FF;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+
+            &:hover {
+                background-color: rgb(212, 76, 55);
+            }
+        }
+    }
+  }
+}

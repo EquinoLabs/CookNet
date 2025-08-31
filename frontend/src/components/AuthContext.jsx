@@ -66,6 +66,26 @@ export const AuthProvider = ({ children }) => {
     checkAuth();
   }, []);
 
+  const loginWithGoogle = async (googleCredential) => {
+    try {
+      // Send Google credential (JWT) to your backend
+      const response = await callApi('post:/users/google-login', { token: googleCredential });
+
+      // Backend returns your usual JWT + user object
+      localStorage.setItem('access_token', response.access_token);
+      localStorage.setItem('refresh_token', response.refresh_token);
+      setToken(response.access_token);
+      setUser(response.user);
+
+      console.log("GoogleResponse:", response.user)
+
+      return { success: true, user: response.user };
+    } catch (error) {
+      console.error('Google login failed:', error);
+      return { success: false, error: error.response?.data?.detail || 'Google login failed' };
+    }
+  };
+
   const login = async (email, password) => {
     try {
       const response = await loginUser(email, password); // Use your existing function
@@ -78,7 +98,7 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true, user: response.user };
     } catch (error) {
-      return { success: false, error: error.response?.data?.detail || 'Login failed' };
+      return { success: false, error: error.response?.data?.detail };
     }
   };
 
@@ -102,6 +122,7 @@ export const AuthProvider = ({ children }) => {
     user,
     token,
     loading,
+    loginWithGoogle,
     login,
     register,
     logout,

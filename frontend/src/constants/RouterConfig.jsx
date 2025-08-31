@@ -6,6 +6,8 @@ import Login from "../pages/Authentication/Login";
 import ProtectedRoute from "../components/ProtectedRoute";
 import MainApp from "../pages/MainApp/MainApp";
 import RootRedirect from "../components/RootRedirect";
+import EmailVerificationPage from "../components/common/EmailVerification/EmailVerificationPage";
+import EmailVerificationSent from "../components/common/EmailVerification/EmailVerificationSent";
 
 const routerConfig = [
   { 
@@ -70,6 +72,8 @@ const routerConfig = [
   },
   { path: "/register", element: <Register /> },
   { path: "/login", element: <Login /> },
+  { path: "/email-verification-sent", element: <EmailVerificationSent /> },
+  { path: "/verify-email", element: <EmailVerificationPage /> },
   { path: "*", element: <NotFound /> },
 ];
 

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../components/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { emitToast } from "../../components/common/ToastContext/ToastEmiiter";
+import GoogleAuth from "./GoogleAuth";
+import constants from "../../constants";
 import "./authentication.scss"; // import SCSS file
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,14 +31,19 @@ const Login = () => {
     try {
       const result = await login(email, password);
       if (result.success) {
-        console.log("Login successful:", result.user);
+        emitToast(constants.LoginPage.Success, "", "success");
         navigate('/'); // Redirect to homepage
       } else {
-        setError(result.error);
+        let ErrorMsg = result.error
+        if (Array.isArray(result.error) && result.error.length > 0) {
+          ErrorMsg = result.error[0].msg;
+        }
+        emitToast(constants.LoginPage.Error.title, ErrorMsg, "error");
+        setError(ErrorMsg);
       }
     } catch (error) {
-      console.error("Login failed:", error);
-      setError("An unexpected error occurred");
+      emitToast(constants.LoginPage.Error.title, constants.LoginPage.Error.err_500, "error");
+      setError(constants.LoginPage.Error.err_500);
     } finally {
       setIsLoading(false);
     }
@@ -71,8 +80,12 @@ const Login = () => {
             required
             className="login-input"
           />
-          <button type="submit" className="login-button">
-            Login
+          <button 
+            type="submit" 
+            className={`login-button ${isLoading ? "loading" : ""}`} 
+            disabled={isLoading}
+          >
+            {isLoading ? <span className="spinner"></span> : "Login"}
           </button>
           
           <div className="divider-container">
@@ -80,10 +93,10 @@ const Login = () => {
             <span className="divider-text">OR</span>
             <div className="divider-line"></div>
           </div>
-          
-          <button className="google-button" onClick={handleGoogleLogin}>
-            Login with Google
-          </button>
+
+          <div className="google-auth-wrapper">
+            <GoogleAuth />
+          </div>
         </form>
         <p className="login-footer">
           Don't have an account? <a href="/register" className="register-link">Register</a>
