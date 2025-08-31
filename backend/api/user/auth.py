@@ -10,6 +10,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from uuid import UUID
 
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
 from api.user import models, schemas
 from database.database import get_db
 
@@ -40,14 +43,21 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
-    """Create a JWT access token."""
+    """Create a JWT access token (supports custom token types)."""
     to_encode = data.copy()
+
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
     else:
         expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    
-    to_encode.update({"exp": expire, "type": "access"})
+
+    # Always set expiration
+    to_encode.update({"exp": expire})
+
+    # Only set type=access if user didn’t already provide one
+    if "type" not in to_encode:
+        to_encode["type"] = "access"
+
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
@@ -96,3 +106,54 @@ async def get_current_user(
         )
     
     return user
+
+
+# Email service function (customize based on your email provider)
+async def send_verification_email_service(email: str, username: str, token: str):
+    verification_url = f"{os.getenv('FRONTEND_URL')}/verify-email?token={token}"
+    
+    subject = "Verify Your CookNet Email"
+    body = f"""
+    Hi {username},
+
+    Please verify your email address by clicking the link below:
+    {verification_url}
+
+    This link will expire in 24 hours.
+
+    Best regards,
+    CookNet Team
+    """
+
+    try:
+        message = Mail(
+            from_email=os.getenv("SENDGRID_SENDER_EMAIL"),
+            to_emails=email,
+            subject=subject,
+            plain_text_content=body
+        )
+
+        sg = SendGridAPIClient(os.getenv("SENDGRID_API_KEY"))
+        response = sg.send(message)
+
+        # Optional: log response details
+        print(f"Email sent to {email}, status: {response.status_code}")
+        if response.status_code == 202:
+            return True
+        return False
+    except Exception as e:
+        print(f"Error sending email: {e}")
+        return False
+
+
+# To check email verification for protected routes
+def require_verified_email(current_user: models.User = Depends(get_current_user)):
+    """
+    Dependency to ensure user has verified email for certain endpoints.
+    """
+    if not current_user.is_email_verified:
+        raise HTTPException(
+            status_code=403, 
+            detail="Email verification required. Please check your email and verify your account."
+        )
+    return current_user

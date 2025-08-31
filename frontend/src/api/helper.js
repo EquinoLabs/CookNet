@@ -1,5 +1,6 @@
 // axios wrapper
 import axios from 'axios';
+import { emitToast } from '../components/common/ToastContext/ToastEmiiter';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_API_URL || '';
 const API_URL = `${BACKEND_URL}/api`;
@@ -77,6 +78,13 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
+    if (
+      originalRequest.url.includes("/login") ||
+      originalRequest.url.includes("/register")
+    ) {
+      return Promise.reject(error);
+    }
+
     // Check if error is 401 and we haven't already tried to refresh
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
@@ -124,7 +132,6 @@ export async function callApi(endpointWithMethod, data = null) {
     return response.data;
   } catch (error) {
     // You can customize error handling here
-    console.error('API error:', error);
     throw error;
   }
 }

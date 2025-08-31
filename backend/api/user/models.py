@@ -4,6 +4,7 @@ from sqlalchemy import Column, Integer, String, Boolean, DateTime, func
 from sqlalchemy.orm import relationship
 from database.database import Base
 from api.community.models import community_members
+from api.user.enum import RoleEnum
 
 class User(Base):
     __tablename__ = "users"
@@ -13,6 +14,12 @@ class User(Base):
     email = Column(String(100), unique=True, index=True, nullable=False)
     hashed_password = Column(String(255), nullable=False)
     is_active = Column(Boolean, default=True)
+    role = Column(String(20), default=RoleEnum.user.value, nullable=False, server_default=RoleEnum.user.value) # options: "user", "admin", "moderator"
+
+    # Google OAuth fields
+    google_id = Column(String(255), unique=True, nullable=True, index=True)
+    is_email_verified = Column(Boolean, default=False, nullable=False)
+    verification_email_sent = Column(Boolean, default=False)
 
     # Optional fields
     profile_image = Column(String(255), nullable=True)  # URL to profile image

@@ -9,3 +9,6 @@ aiohttp
 pillow
 python-multipart
 boto3
+google-auth
+requests
+sendgrid

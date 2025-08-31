@@ -1,0 +1,12 @@
+{
+  "content": "Whipped up this zesty Thai-inspired peanut noodle salad today! Bursting with flavors and so refreshing. A perfect lunch for a sunny day 🥗🌶️",
+  "recipe_title": "Spicy Thai Peanut Noodle Salad",
+  "ingredients": "200g rice noodles, 1 cup shredded carrots, 1 red bell pepper thinly sliced, 1/2 cup chopped peanuts, 1/4 cup fresh cilantro, 2 green onions chopped, 2 tbsp soy sauce, 1 tbsp sesame oil, 1 tbsp lime juice, 1 tsp sriracha, Salt to taste",
+  "instructions": "1. Cook rice noodles according to package instructions, drain and set aside. 2. In a small bowl, mix soy sauce, sesame oil, lime juice, and sriracha to make the dressing. 3. Toss noodles with carrots, bell pepper, green onions, and cilantro. 4. Pour dressing over salad and mix well. 5. Top with chopped peanuts. 6. Serve chilled or at room temperature.",
+  "cooking_time": 20,
+  "servings": 2,
+  "difficulty": "medium",
+  "cuisine_type": "Thai",
+  "is_public": true,
+  "image": "[YOUR_IMAGE_FILE_HERE]"
+}
