@@ -328,6 +328,9 @@
 .google-auth-wrapper {
   width: 100%;
   margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   // Style the default Google button to center its content
   & > div {
