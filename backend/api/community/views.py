@@ -13,6 +13,7 @@ from api.community.models import Community, CommunityInvite, community_members
 from api.community.schemas import *
 from api.user.auth import get_current_user
 from api.cloudflare.r2_service import upload_media_file
+from api.user.auth import require_verified_email
 
 router = APIRouter(prefix="/communities", tags=["communities"])
 
@@ -58,7 +59,7 @@ async def create_community(
     display_photo: Optional[UploadFile] = File(None),
     banner_photo: Optional[UploadFile] = File(None),
     db: AsyncSession = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(require_verified_email)
 ):
     try:
         community_data = CommunityCreate(

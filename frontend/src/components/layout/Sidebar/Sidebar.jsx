@@ -9,6 +9,8 @@ const Sidebar = ({ sidebar, currentPath }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
+
+  console.log("image came:", user?.profile_image)
   
   const handlePost = () => {
     console.log('Post button clicked');
@@ -38,7 +40,7 @@ const Sidebar = ({ sidebar, currentPath }) => {
           <div className='profile-section'>
             <div className='profile-container'>
               <div className='profile-info'>
-                <img src={user?.profile_image} alt={user?.username} className='profile-image' />
+                <img src={user.profile_image} alt={user.username} className='profile-image' referrerPolicy="no-referrer" />
                 <p className='profile-username'>{user?.username}</p>
               </div>
               <div className='more-options-container'>
