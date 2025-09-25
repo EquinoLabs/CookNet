@@ -7,6 +7,10 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { isAuthenticated, loading } = useAuth();
 
+  const handleLogoClick = () => {
+    navigate('/');
+  }
+
   const handleLoginClick = () => {
     navigate('/login');
   };
@@ -21,7 +25,7 @@ export default function Navbar() {
         <div className="navbar-container">
           {/* Logo */}
           <div className="navbar-logo">
-            <h1 className="logo-text">CookNet</h1>
+            <h1 className="logo-text" onClick={handleLogoClick}>CookNet</h1>
           </div>
         </div>
       </nav>
@@ -33,7 +37,7 @@ export default function Navbar() {
           
           {/* Logo */}
           <div className="navbar-logo">
-            <h1 className="logo-text">CookNet</h1>
+            <h1 className="logo-text" onClick={handleLogoClick}>CookNet</h1>
           </div>
 
           {/* Navigation Links - Centered */}
