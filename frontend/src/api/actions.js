@@ -60,3 +60,4 @@ export function getFeedPosts(cursor = null, limit = 10) {
 export function createPost(formData) {
   return callApi('post:/posts', formData, true); // The third argument 'true' indicates multipart/form-data
 }
+
