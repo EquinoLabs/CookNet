@@ -56,3 +56,7 @@ export function getFeedPosts(cursor = null, limit = 10) {
   params.append('limit', limit);
   return callApi(`get:/posts/feed?${params.toString()}`);
 }
+
+export function createPost(formData) {
+  return callApi('post:/posts', formData, true); // The third argument 'true' indicates multipart/form-data
+}

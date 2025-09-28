@@ -14,6 +14,7 @@ const Sidebar = ({ sidebar, currentPath }) => {
   
   const handlePost = () => {
     console.log('Post button clicked');
+    navigate('/create-post')
   };
 
   const handleLogout = () => {
@@ -31,6 +32,7 @@ const Sidebar = ({ sidebar, currentPath }) => {
       <div className="logo">
         <h1 className="logo-text">CookNet</h1>
       </div>
+
       <nav className="navigation">
         {sidebar.map((sidebarOptions, index) => (
           <SidebarOptions key={index} {...sidebarOptions} currentPath={currentPath} />

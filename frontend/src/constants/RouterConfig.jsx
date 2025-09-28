@@ -5,6 +5,7 @@ import Register from "../pages/Authentication/Register";
 import Login from "../pages/Authentication/Login";
 import ProtectedRoute from "../components/ProtectedRoute";
 import MainApp from "../pages/MainApp/MainApp";
+import CreatePost from "../pages/MainApp/CreatePost";
 import RootRedirect from "../components/RootRedirect";
 import EmailVerificationPage from "../components/common/EmailVerification/EmailVerificationPage";
 import EmailVerificationSent from "../components/common/EmailVerification/EmailVerificationSent";
@@ -19,6 +20,14 @@ const routerConfig = [
     element: (
       <ProtectedRoute>
         <MainApp />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: "/create-post", 
+    element: (
+      <ProtectedRoute>
+        <CreatePost />
       </ProtectedRoute>
     )
   },

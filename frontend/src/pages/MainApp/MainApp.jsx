@@ -13,6 +13,7 @@ import DiscoverSidebar from '../../components/layout/DiscoverSidebar/DiscoverSid
 import { House, Users, LayoutDashboard, Bookmark, Handshake, Settings } from "lucide-react";
 import './MainApp.scss';
 
+
 const sidebarData = [
   { name: "Feed", icon: House, path: "/feed", component: Feed },
   { name: "Communities", icon: Users, path: "/communities", component: Communities },
@@ -52,9 +53,11 @@ const MainApp = () => {
         <main className="main-content">
           <CurrentComponent />
         </main>
-        <aside className="discover-sidebar-main">
-          <DiscoverSidebar />
-        </aside>
+        {CurrentComponent !== PersonalDashboard && (
+          <aside className="discover-sidebar-main">
+            <DiscoverSidebar />
+          </aside>
+        )}
       </div>
     </div>
   );
